@@ -3,6 +3,7 @@ import { createOrders } from '../controllers/Order'
 
 const router = Router()
 
-router.post('/', createOrders)
+router.post('/:id', createOrders)
+
 
 export default router

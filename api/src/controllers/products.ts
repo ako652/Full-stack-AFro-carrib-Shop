@@ -1,8 +1,12 @@
 
 // product controller here
 import { Response, Request, NextFunction} from "express"
-import { getAllProducts, getProductsById } from "../services/products"
-import Product from "../models/Products"
+import {
+  getAllProducts,
+  getProductsById,
+  createProduct,
+} from "../services/products";
+import product from "../models/Products"
 
 
 export const getProducts= async(req:Request, res:Response, next:NextFunction)=>{
@@ -17,14 +21,14 @@ export const getProducts= async(req:Request, res:Response, next:NextFunction)=>{
 }
 export const creatProductData= async(req:Request, res:Response, next:NextFunction)=>{
 try {
-     const productData = new Product({
+     const productData = new product({
        title: req.body.title,
        price: req.body.price,
        image: req.body.image,
        description: req.body.description,
      });
-
-     res.status(200).json(productData);
+    const products = await createProduct(productData);
+     res.status(200).json(products);
     
 } catch (error) {
      res.status(500);

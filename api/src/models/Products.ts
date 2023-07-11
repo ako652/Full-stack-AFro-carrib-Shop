@@ -10,7 +10,7 @@ export type ProductDocument=Document & {
 const ProductSchema= new mongoose.Schema({
     title:{
         type:String,
-        required:true
+        
     },
     price:{
         type:Number,

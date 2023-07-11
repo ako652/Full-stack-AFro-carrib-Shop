@@ -1,13 +1,13 @@
 
 import { Request,Response,NextFunction } from 'express'
-import Users from '../models/Users'
+import users from '../models/Users'
 import { createUser, updateUserinformation } from '../services/users'
 
 
 export const creatUserInformation = async(req:Request,res:Response, next:NextFunction)=>{
  try {
-    const [email,password]=req.body
-    const userInformation= new Users({
+    const {email, password}=req.body
+    const userInformation= new users({
           email,
           password
     })
