@@ -16,3 +16,14 @@ if (!foundedUser){
 }
 return foundedUser
 }
+
+export const findUserByEmail=async(userEmail:string):Promise<UserDocument>=>{
+    const foundUser= await Users.findOne({email:userEmail})
+    if (!foundUser){
+        throw new NotFoundError(`user ${userEmail} not found`)
+
+    }
+    return foundUser
+
+}
+ 

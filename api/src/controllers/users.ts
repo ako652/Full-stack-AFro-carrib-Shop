@@ -1,7 +1,10 @@
-
 import { Request,Response,NextFunction } from 'express'
+import jwt from 'jsonwebtoken'
+import dotenv from 'dotenv'
+
 import users from '../models/Users'
-import { createUser, updateUserinformation } from '../services/users'
+import { createUser,   findUserByEmail,   updateUserinformation } from '../services/users'
+
 
 
 export const creatUserInformation = async(req:Request,res:Response, next:NextFunction)=>{
@@ -28,3 +31,32 @@ export const updateUserInfo=async(req:Request,res:Response, next:NextFunction)=>
         
     }
 }
+dotenv.config()
+const JWT_SECRET=process.env.JWT_SECRET as string
+export const loginUser=async(req:Request, res:Response, next:NextFunction)=>{
+
+   try {
+     const userData = await findUserByEmail(req.body.email);
+     if(!userData){
+        res.status(401).json({message:'wrong credentials'})
+        return
+     }
+     const token= jwt.sign(
+        {
+            email:userData.email,
+            _id:userData._id
+        },
+        JWT_SECRET,
+        {expiresIn:'1hr'}
+
+     )
+      res.json({ userData, token });
+    
+   } catch (error) {
+    next(error)
+    
+   }
+  
+
+}
+
