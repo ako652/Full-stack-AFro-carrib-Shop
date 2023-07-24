@@ -40,7 +40,7 @@ try {
 export const getProductId=async(req:Request, res:Response, next:NextFunction)=>{
   
   try {
-    const productId = req.params.id;
+    const productId = req.params.productId;
     const product=await getProductsById(productId)
     res.status(200).json(product)
 

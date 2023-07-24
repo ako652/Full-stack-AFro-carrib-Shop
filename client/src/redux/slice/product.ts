@@ -2,10 +2,12 @@ import { Product } from './../../type/type';
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 type InitialState={
-products:Product[]
+products:Product[],
+productDetail:Product|null
 }
 const initialState:InitialState ={
-    products:[]
+    products:[],
+    productDetail:null
 }
 
 
@@ -18,6 +20,9 @@ const productSlice= createSlice({
       getProducts:(state, action:PayloadAction<Product[]>)=>{
           state.products=action.payload
         
+      },
+      getProductDetail:(state, action:PayloadAction<Product>)=>{
+         state.productDetail=action.payload
       }
     }
 

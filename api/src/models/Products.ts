@@ -1,27 +1,33 @@
 import mongoose, {Document} from "mongoose";
 
 export type ProductDocument=Document & {
+    id:number,
     title:string,
     price:number,
     description:string,
     image:string
 }
 
-const ProductSchema= new mongoose.Schema({
-    title:{
-        type:String,
-        
-    },
-    price:{
-        type:Number,
-
-    },
-    description:{
-        type:String
-    },
-    image:{
-        type:String
-    }
-})
+const ProductSchema = new mongoose.Schema({
+  id: {
+    type: Number,
+  },
+  title: {
+    type: String,
+    requried: true,
+    unique: true,
+  },
+  price: {
+    type: Number,
+    requried: true,
+    unique: true,
+  },
+  description: {
+    type: String,
+  },
+  image: {
+    type: String,
+  },
+});
 
 export default mongoose.model<ProductDocument>('Products', ProductSchema)

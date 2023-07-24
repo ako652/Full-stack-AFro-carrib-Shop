@@ -6,6 +6,6 @@ const router =Router()
 
 router.get('/', getProducts)
 router.post("/", creatProductData);
-router.get('/:id', getProductId)
+router.get('/:productId', getProductId)
 
 export default router

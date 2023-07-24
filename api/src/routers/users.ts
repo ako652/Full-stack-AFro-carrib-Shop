@@ -5,8 +5,8 @@ import passport from 'passport'
 const router =Router()
 
 router.post('/', creatUserInformation)
-router.put('/:id',passport.authenticate("jwt", {session:false}), updateUserInfo )
-router.post('/Login', loginUser)
+router.put('/:userId',passport.authenticate("jwt", {session:false}), updateUserInfo )
+router.post('/login', loginUser)
 
 
 export default router

@@ -2,11 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 import {User} from '../../type/type'
 
 type InitialState={
-    user:User[]
+    user:User|null
 }
 
 const initialState:InitialState={
-    user:[]
+    user:null
 }
 
 
@@ -15,7 +15,7 @@ const userSlice= createSlice({
     initialState,
     reducers:{
         userProfile:(state, action)=>{
-
+           state.user=action.payload
         }
     }
 })

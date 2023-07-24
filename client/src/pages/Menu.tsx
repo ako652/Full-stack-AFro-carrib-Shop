@@ -16,7 +16,7 @@ export default function Menu() {
 
   return <div className="m-20 grid grid-cols-3">
     {products.map((item)=>{
-      return (<ProductItem item={item} />);
+      return (<ProductItem item={item} key={item._id}/>);
     })}
   </div>;
 }
