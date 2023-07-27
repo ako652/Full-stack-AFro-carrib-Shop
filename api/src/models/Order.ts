@@ -1,23 +1,24 @@
 import mongoose, { Document } from "mongoose";
+import { ProductDocument } from "./Products";
 
-export type ProductOrderDocument = Document & {
-  title: string;
-  price: number;
-  description: string;
-  image: string;
+export type ProductOrderDocument = ProductDocument & {
+
   quantity: number;
+};
+export type OrderDocument = Document & {
+  date: Date;
+  productList: ProductOrderDocument[];
+  userId: string;
 };
 
 const ProductOrderSchema = new mongoose.Schema({
   title: {
     type: String,
     requried: true,
-    unique: true,
   },
   price: {
     type: Number,
     requried: true,
-    unique: true,
   },
   description: {
     type: String,
@@ -28,13 +29,10 @@ const ProductOrderSchema = new mongoose.Schema({
   image: {
     type: String,
   },
+  
 });
 
-export type OrderDocument = Document & {
-  date: Date;
-  productList: ProductOrderDocument[];
-  userId: string;
-};
+
 const OrderSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
@@ -45,6 +43,9 @@ const OrderSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
+  total:{
+    type:Number
+  }
 });
 
 export default mongoose.model<OrderDocument>("Order", OrderSchema);

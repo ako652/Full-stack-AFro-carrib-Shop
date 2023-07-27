@@ -1,23 +1,31 @@
 
 
 export type Product ={
-    _id:number,
+    _id:string,
     image:string,
     title:string,
-    price:string,
+    price:number,
     description:string
 }
 
 export type Cart = {
-  _id: number;
+  _id: string;
   image: string;
   title: string;
-  price: string;
+  price: number;
   description: string;
   quantity: number;
 };
 export type User = {
-  _id: number;
+  _id: string;
   email: string;
   password: string;
 };
+
+export type Order={
+  _id:string,
+  userId:string,
+  productList:Cart[],
+  createdArt:string
+
+}

@@ -4,20 +4,18 @@ import { Link } from "react-router-dom";
 import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
-type Prop = {
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-};
 
-export default function Nav({setOpen}:Prop) {
-   const handleClickOpen = () => {
-     setOpen(true);
-   };
+
+export default function Nav() {
+ 
 
   
 
   return (
-    <div className="flex justify-around bg-slate-950 p-4 content-center text-center text-white">
-      <div> AFRO-CARRIB</div>
+    <div className="flex justify-between bg-slate-950 p-4 content-center text-center text-white">
+      <div className="flex w-24 justify-center rounded-full bg-lime-950 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+        AFRO-CARRIB
+      </div>
       <div className="flex gap-10">
         <p>
           <Link to="/">Home</Link>
@@ -30,12 +28,12 @@ export default function Nav({setOpen}:Prop) {
           <Link to="/contact"> Contact</Link>
         </p>
 
-        <button onClick={handleClickOpen} className="bg-red-400 rounded-lg">
+        <button className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
           <Link to="/login">
             <PersonAddAlt1Icon /> SIGN IN/REGISTER
           </Link>
         </button>
-        <button className="bg-red-400 rounded-lg">
+        <button className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
           <Link to="/cart">
             <AddShoppingCartIcon />
             CART

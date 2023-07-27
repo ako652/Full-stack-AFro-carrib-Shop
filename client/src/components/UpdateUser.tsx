@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import axios from 'axios';
+import {Link} from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
@@ -123,7 +124,8 @@ setFormData({ password: "", email: "" });
           type="button"
           className="text-sm font-semibold leading-6 text-gray-900"
         >
-          Cancel
+          <Link to="/login"> Cancel</Link>
+         
         </button>
         <button
           type="submit"

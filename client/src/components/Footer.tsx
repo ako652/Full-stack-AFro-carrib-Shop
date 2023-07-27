@@ -8,12 +8,14 @@ export default function Footer() {
     <div className="flex justify-around bg-slate-950 p-4 content-center text-center text-white">
       <div>
         <h1>Customer Service</h1>
-        <button className="bg-red-400 w-32 rounded-full">Contact Us</button>
+        <button className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+          Contact Us
+        </button>
       </div>
-      <div className='w-96'>
-        <LinkedInIcon  />
-        <FacebookIcon  />
-        <YouTubeIcon  />
+      <div className="w-96">
+        <LinkedInIcon />
+        <FacebookIcon />
+        <YouTubeIcon />
       </div>
     </div>
   );
