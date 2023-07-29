@@ -2,7 +2,6 @@ import mongoose, { Document } from "mongoose";
 import { ProductDocument } from "./Products";
 
 export type ProductOrderDocument = ProductDocument & {
-
   quantity: number;
 };
 export type OrderDocument = Document & {
@@ -29,9 +28,7 @@ const ProductOrderSchema = new mongoose.Schema({
   image: {
     type: String,
   },
-  
 });
-
 
 const OrderSchema = new mongoose.Schema({
   createdAt: {
@@ -43,9 +40,9 @@ const OrderSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
-  total:{
-    type:Number
-  }
+  total: {
+    type: Number,
+  },
 });
 
 export default mongoose.model<OrderDocument>("Order", OrderSchema);
