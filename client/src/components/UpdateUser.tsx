@@ -1,54 +1,52 @@
-import {useState} from 'react'
-import axios from 'axios';
-import {Link} from 'react-router-dom';
+import { useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../redux/store';
-import { userAction } from '../redux/slice/user';
-import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../redux/store";
+import { userAction } from "../redux/slice/user";
+import { useNavigate } from "react-router-dom";
 
 export default function UpdateUser() {
-     const userDetails = useSelector((state: RootState) => state.user.user);
-    const [formData, setFormData]=useState({
-        email:userDetails?.email,
-        password:userDetails?.password
-    })
-const updatePassword=(event:React.ChangeEvent<HTMLInputElement>)=>{
-    setFormData({...formData, password:event.target.value})
+  const userDetails = useSelector((state: RootState) => state.user.user);
+  const [formData, setFormData] = useState({
+    email: userDetails?.email,
+    password: userDetails?.password,
+  });
+  const updatePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, password: event.target.value });
+  };
+  const updateEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, email: event.target.value });
+  };
 
-}
-const updateEmail=(event:React.ChangeEvent<HTMLInputElement>)=>{
-setFormData({...formData, email:event.target.value})
-}
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-const dispatch=useDispatch()
-const navigate =useNavigate()
-
-const updateUserInfo=()=>{
-    const token =localStorage.getItem("userToken")
-     const url = `http://localhost:8000/users/${userDetails?._id}`;
-     axios.put(url, formData, {
-        headers:{
-            "Content-Type":"application/json",
-            Authorization:`Bearer ${token}`
-
+  const updateUserInfo = () => {
+    const token = localStorage.getItem("userToken");
+    const url = `http://localhost:8000/users/${userDetails?._id}`;
+    axios
+      .put(url, formData, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        if (res.status === 200) {
+          dispatch(userAction.userProfile(res.data));
+          console.log(res.data);
+          navigate("/login");
         }
-     }).then((res)=>{
-        if(res.status===200){
-            dispatch(userAction.userProfile(res.data));
-            console.log(res.data)
-            navigate('/login')
-            
+      })
+      .catch((error) => {
+        console.log(error);
+      });
 
-        }
-              
-     }).catch((error)=>{ 
-      
-      console.log(error)})
-     
-setFormData({ password: "", email: "" });
-}
-   
+    setFormData({ password: "", email: "" });
+  };
+
   return (
     <div>
       <div className="space-y-12">
@@ -125,7 +123,6 @@ setFormData({ password: "", email: "" });
           className="text-sm font-semibold leading-6 text-gray-900"
         >
           <Link to="/login"> Cancel</Link>
-         
         </button>
         <button
           type="submit"

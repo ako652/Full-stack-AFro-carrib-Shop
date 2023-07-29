@@ -1,4 +1,4 @@
-import React,{useEffect,useState} from 'react'
+import {useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../redux/store'
 import { fetchOrderList } from '../redux/thunk/order'
@@ -20,17 +20,26 @@ export default function Orders() {
   
 
   return (
-    <div>
-      {orderList.map((item)=>{
-        return <div>{item.productList.map((product)=>{
-          return (
-            <div>{product.price}</div>
-          )
-        })}</div>
-      }
-       
-      )}
-      
+    <div className=" h-screen grid grid-cols-4 ">
+      {orderList.map((item) => {
+        return (
+          <div key={item._id}>
+            {item.productList.map((product) => {
+              return (
+                <div
+                  key={product._id}
+                  className="w-48 rounded-md border-1 bg-slate-400  border-gray-100"
+                >
+                  <h1>{product.title}</h1>
+                  <img src={product.image} className="w-48 h-24"alt={product.title} />
+                  <p> QTY-{product.quantity}</p>
+                  <p>£{product.price}</p>
+                </div>
+              );
+            })}
+          </div>
+        );
+      })}
     </div>
-  )
+  );
 }

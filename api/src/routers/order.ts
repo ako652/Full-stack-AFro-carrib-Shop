@@ -11,7 +11,7 @@ router.post(
 );
 router.get(
   "/:orderId",
-  passport.authenticate("jwt", { session: false }),
+ 
   getOrderbyId
 );
 

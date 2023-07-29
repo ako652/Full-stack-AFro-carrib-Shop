@@ -1,32 +1,28 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
-import { Product ,Cart} from '../type/type'
-import { useDispatch, useSelector  } from 'react-redux'
-import { cartAction } from '../redux/slice/cart'
-import { AppDispatch, RootState } from '../redux/store'
-import { ProductAction } from '../redux/slice/product'
+import { Link } from "react-router-dom";
+import { Product } from "../type/type";
+import { useDispatch } from "react-redux";
+import { cartAction } from "../redux/slice/cart";
+import { AppDispatch } from "../redux/store";
+
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { Button, CardActionArea, CardActions } from "@mui/material";
+import { CardActionArea, CardActions } from "@mui/material";
 
+type Prop = {
+  item: Product;
+};
 
-type Prop={
-item:Product
-}
-
-export default function ProductItem({item}:Prop) {
+export default function ProductItem({ item }: Prop) {
   const dispatch = useDispatch<AppDispatch>();
 
-   
- 
   function addToCart(item: Product) {
-   dispatch(cartAction.addtoCart(item))
+    dispatch(cartAction.addtoCart(item));
   }
   return (
-    <div key={item._id} className="shadow-2xl">
-      <Card sx={{ maxWidth: 345 }}>
+    <div key={item._id}>
+      <Card className="shadow-2xl rounded-md border-1  border-gray-100 ">
         <CardActionArea>
           <Link to={`/menu/${item._id}`}>
             <CardMedia

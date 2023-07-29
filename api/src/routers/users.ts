@@ -5,7 +5,11 @@ import passport from 'passport'
 const router =Router()
 
 router.post('/', creatUserInformation)
-router.put('/:userId',passport.authenticate("jwt", {session:false}), updateUserInfo )
+router.put(
+  "/:userId",
+  passport.authenticate("jwt", { session: false }),
+  updateUserInfo
+);
 router.post('/login', loginUser)
 
 

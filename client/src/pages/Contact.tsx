@@ -3,12 +3,13 @@ import { useState } from 'react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { Switch } from '@headlessui/react'
 
-function classNames(...classes:any) {
-  return classes.filter(Boolean).join(' ')
-}
+
 
 export default function Contact() {
   const [agreed, setAgreed] = useState(false)
+  function classNames(...classes: any) {
+    return classes.filter(Boolean).join(" ");
+  }
 
   return (
     <div className="isolate bg-white px-6 py-24 sm:py-32 lg:px-8">

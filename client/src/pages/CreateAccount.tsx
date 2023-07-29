@@ -1,44 +1,37 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import axios from "axios";
 
-
-
-
-
 export default function CreateAccount() {
- const [userInformation, setUserInformation] = useState({
-   email: "",
-   password: "",
-  
- });
+  const [userInformation, setUserInformation] = useState({
+    email: "",
+    password: "",
+  });
 
- const handleEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
-   setUserInformation({ ...userInformation, email: event.target.value });
- };
- const handlePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
-   setUserInformation({ ...userInformation, password: event.target.value });
- };
- const navigate = useNavigate();
- const submitUserInfos = () => {
-   const url = "http://localhost:8000/users/";
-   axios
-     .post(url, userInformation)
-     .then((res) => {
-       if (res.status === 200) {
-         navigate("/login");
-         console.log(res.data);
-       }
-     })
-     .catch((error) => console.log(error));
-     setUserInformation({ password: "", email: "" });
- };
+  const handleEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUserInformation({ ...userInformation, email: event.target.value });
+  };
+  const handlePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUserInformation({ ...userInformation, password: event.target.value });
+  };
+  const navigate = useNavigate();
+  const submitUserInfos = () => {
+    const url = "http://localhost:8000/users/";
+    axios
+      .post(url, userInformation)
+      .then((res) => {
+        if (res.status === 200) {
+          navigate("/login");
+          console.log(res.data);
+        }
+      })
+      .catch((error) => console.log(error));
+    setUserInformation({ password: "", email: "" });
+  };
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-         
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Sign up to your account
           </h2>
@@ -74,7 +67,6 @@ export default function CreateAccount() {
                 >
                   Password
                 </label>
-                
               </div>
               <div className="mt-2">
                 <input
@@ -102,12 +94,12 @@ export default function CreateAccount() {
 
           <p className="mt-10 text-center text-sm text-gray-500">
             Not a member?
-            <a
-              href="#"
+            <button
+           
               className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
             >
               Start a 14 day free trial
-            </a>
+            </button>
           </p>
         </div>
       </div>

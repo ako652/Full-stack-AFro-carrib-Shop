@@ -1,79 +1,73 @@
 import { Fragment, useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 import { Link } from "react-router-dom";
 import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import { useSelector , useDispatch} from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../redux/store";
 import { Cart } from "../type/type";
 import { cartAction } from "../redux/slice/cart";
 
-
-
 export default function Carts() {
   const [open, setOpen] = useState(true);
-  const cartList =useSelector((state:RootState)=> state.cart.cart)
-  const totalAmount=useSelector((state:RootState)=>state.cart.totalsum)
-  const userDetails=useSelector((state:RootState)=>state.user.user)
-   const dispatch =useDispatch()
+  const cartList = useSelector((state: RootState) => state.cart.cart);
+  const totalAmount = useSelector((state: RootState) => state.cart.totalsum);
+  const userDetails = useSelector((state: RootState) => state.user.user);
+  const dispatch = useDispatch();
 
-   function increaseQty(item:Cart){
-    dispatch(cartAction.addtoCart(item))
-   }
-   function decreaseQty(item: Cart) {
-     dispatch(cartAction.decreaseQty(item));
-   }
-   function deleteItem(item: Cart) {
-     dispatch(cartAction.deleteCartItem(item));
-   }
+  function increaseQty(item: Cart) {
+    dispatch(cartAction.addtoCart(item));
+  }
+  function decreaseQty(item: Cart) {
+    dispatch(cartAction.decreaseQty(item));
+  }
+  function deleteItem(item: Cart) {
+    dispatch(cartAction.deleteCartItem(item));
+  }
 
+  const onClickCheckout = () => {
+    const token = localStorage.getItem("userToken");
+    const url = `http://localhost:8000/order/${userDetails?._id}`;
 
-   const onClickCheckout=()=>{
-    const token=localStorage.getItem('userToken')
-   const url = `http://localhost:8000/order/${userDetails?._id}`;
-
-    axios.post(
-      url,
-      {productList:cartList},
-      {
-        headers:{
-          "Content-Type":"application/json",
-          Authorization:`Bearer ${token}`
+    axios
+      .post(
+        url,
+        { productList: cartList },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
         }
-      }
-
-    ).then((res)=>{
-      console.log('new data',res)
-      console.log('new',res.data)
-      if(res.status===200){
-        alert('thanks for trusting us')
-        
-       
-      }
-
-    }).catch((error)=>{
-      if(error.response.status===401){
-        alert('login to complete your order')
-        return
-      }
-
-    })
-   }
-   if(cartList.length===0){
+      )
+      .then((res) => {
+        console.log("new data", res);
+        console.log("new", res.data);
+        if (res.status === 200) {
+          alert("thanks for trusting us");
+        }
+      })
+      .catch((error) => {
+        if (error.response.status === 401) {
+          alert("login to complete your order");
+          return;
+        }
+      });
+  };
+  if (cartList.length === 0) {
     return (
       <div className="h-screen ">
         <div className="mt-48">
           no data, click here to
           <Link to="/menu">
             <button className="rounded-full w-24 bg-black text-white">
-              
               shop now
             </button>
           </Link>
         </div>
       </div>
     );
-   }
+  }
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={setOpen}>
@@ -115,8 +109,7 @@ export default function Carts() {
                             onClick={() => setOpen(false)}
                           >
                             <span className="sr-only">Close panel</span>
-                            <Link to='/'>
-                            
+                            <Link to="/">
                               <XMarkIcon
                                 className="h-6 w-6"
                                 aria-hidden="true"
@@ -147,7 +140,7 @@ export default function Carts() {
                                     <div>
                                       <div className="flex justify-between text-base font-medium text-gray-900">
                                         <h3>
-                                          <a>{product.title}</a>
+                                          <p>{product.title}</p>
                                         </h3>
                                         <p className="ml-4">{product.price}</p>
                                       </div>

@@ -1,22 +1,17 @@
-import react, { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../redux/store";
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions } from '@mui/material';
-
-import { fetchProductDetails } from "../redux/thunk/product";
 import { useParams } from "react-router-dom";
 
-
-
-
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Typography from "@mui/material/Typography";
+import { Button, CardActionArea, CardActions } from "@mui/material";
+import { fetchProductDetails } from "../redux/thunk/product";
 
 
 export default function ProductDetail() {
-
   const productDetail = useSelector(
     (state: RootState) => state.product.productDetail
   );
@@ -29,8 +24,6 @@ export default function ProductDetail() {
       dispatch(fetchProductDetails(productId));
     }
   }, [productId, dispatch]);
-
- 
 
   return (
     <div>

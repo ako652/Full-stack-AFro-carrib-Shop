@@ -6,49 +6,40 @@ import { useDispatch } from "react-redux";
 
 import { userAction } from "../redux/slice/user";
 
-
-
-
 export default function LoginPage() {
-const [formData, setFormData] = useState({
-  email: "",
-  password: "",
-});
-
-const emailHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-  setFormData({ ...formData, email: event.target.value });
-};
-
-const passwordHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-  setFormData({ ...formData, password: event.target.value });
-};
-const navigate = useNavigate();
-const dispatch = useDispatch();
-const submitUserLogin = () => {
-  const url = "http://localhost:8000/users/login";
-  axios.post(url, formData).then((res) => {
-    if (res.status === 200) {
-      dispatch(
-        userAction.userProfile({
-          user: res.data.userData,
-          token : res.data.token,
-        })
-      );
-
-      
-      
-
-      
-      
-      navigate("/users");
-    }
-    console.log(res.data);
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
   });
-};
-const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
-  event.preventDefault();
 
-};
+  const emailHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, email: event.target.value });
+  };
+
+  const passwordHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, password: event.target.value });
+  };
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const submitUserLogin = () => {
+    const url = "http://localhost:8000/users/login";
+    axios.post(url, formData).then((res) => {
+      if (res.status === 200) {
+        dispatch(
+          userAction.userProfile({
+            user: res.data.userData,
+            token: res.data.token,
+          })
+        );
+
+        navigate("/users");
+      }
+      console.log(res.data);
+    });
+  };
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+    event.preventDefault();
+  };
 
   return (
     <>
@@ -76,7 +67,7 @@ const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
                   autoComplete="email"
                   onChange={emailHandler}
                   required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
@@ -91,7 +82,6 @@ const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
                 </label>
               </div>
               <div className="flex items-center justify-between">
-               
                 <div className="text-sm">
                   <button className="font-semibold text-indigo-600 hover:text-indigo-500">
                     <Link to="/update">Forgot password?</Link>
@@ -106,7 +96,7 @@ const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
                   type="password"
                   autoComplete="current-password"
                   required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
@@ -124,11 +114,14 @@ const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
 
           <p className="mt-10 text-center text-sm text-gray-500">
             Not a member?
-            <a className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+            <button className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
               Start a 14 day free trial
-            </a>
+            </button>
             <button className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
               <Link to="/register">sign up here</Link>{" "}
+            </button>
+            <button className="flex mt-2 w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+              <Link to="/order">view order</Link>
             </button>
           </p>
         </div>
