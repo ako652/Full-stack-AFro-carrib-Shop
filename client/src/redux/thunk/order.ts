@@ -3,7 +3,7 @@ import { AppDispatch } from "../store";
 import { orderAction } from "../slice/order";
 
 export function fetchOrderList(userId: string) {
-  const url = `http://localhost:8000/order/${userId}`;
+  const url = `https://backend-tc6z.onrender.com/order/${userId}`;
   return async (dispatch: AppDispatch) => {
     axios
       .get(url)

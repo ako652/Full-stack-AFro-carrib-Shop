@@ -27,7 +27,7 @@ export default function Carts() {
 
   const onClickCheckout = () => {
     const token = localStorage.getItem("userToken");
-    const url = `http://localhost:8000/order/${userDetails?._id}`;
+    const url = `https://backend-tc6z.onrender.com/order/${userDetails?._id}`;
 
     axios
       .post(

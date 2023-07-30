@@ -3,7 +3,7 @@ import { ProductAction } from "../slice/product";
 import { AppDispatch } from "./../store";
 
 export function fetchProduct() {
-  const url = "http://localhost:8000/products";
+  const url = "https://backend-tc6z.onrender.com/products";
   return (dispatch: AppDispatch) => {
     axios
       .get(url)
@@ -17,12 +17,11 @@ export function fetchProduct() {
   };
 }
 
-export function fetchProductDetails(productId:string){
-  const url = `http://localhost:8000/products/${productId}`;
-  return async(dispatch:AppDispatch)=>{
-    const response=await axios.get(url)
-    const data=await response.data
-    dispatch(ProductAction.getProductDetail(data))
-
-  }
+export function fetchProductDetails(productId: string) {
+  const url = `https://backend-tc6z.onrender.com/products/${productId}`;
+  return async (dispatch: AppDispatch) => {
+    const response = await axios.get(url);
+    const data = await response.data;
+    dispatch(ProductAction.getProductDetail(data));
+  };
 }

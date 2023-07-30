@@ -22,7 +22,7 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const submitUserLogin = () => {
-    const url = "http://localhost:8000/users/login";
+    const url = "https://backend-tc6z.onrender.com/users/login";
     axios.post(url, formData).then((res) => {
       if (res.status === 200) {
         dispatch(

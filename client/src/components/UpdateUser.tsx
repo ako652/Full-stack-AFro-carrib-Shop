@@ -25,7 +25,7 @@ export default function UpdateUser() {
 
   const updateUserInfo = () => {
     const token = localStorage.getItem("userToken");
-    const url = `http://localhost:8000/users/${userDetails?._id}`;
+    const url = `https://backend-tc6z.onrender.com/users/${userDetails?._id}`;
     axios
       .put(url, formData, {
         headers: {

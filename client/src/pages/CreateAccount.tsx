@@ -16,7 +16,7 @@ export default function CreateAccount() {
   };
   const navigate = useNavigate();
   const submitUserInfos = () => {
-    const url = "http://localhost:8000/users/";
+    const url = "https://backend-tc6z.onrender.com/users/";
     axios
       .post(url, userInformation)
       .then((res) => {
@@ -94,10 +94,7 @@ export default function CreateAccount() {
 
           <p className="mt-10 text-center text-sm text-gray-500">
             Not a member?
-            <button
-           
-              className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
-            >
+            <button className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
               Start a 14 day free trial
             </button>
           </p>
